@@ -104,3 +104,25 @@ filtros.forEach(function(boton){
     });
 
 });
+
+//Buscador de tareas
+const buscador = document.querySelector("#inputBuscar");
+
+buscador.addEventListener("input", function(){
+
+    const texto = buscador.value.toLowerCase();
+    const tareas = document.querySelectorAll(".card");
+
+    tareas.forEach(function(tarea){
+
+        const titulo = tarea.querySelector(".card__title").textContent.toLowerCase();
+
+        if(titulo.includes(texto)){
+            tarea.style.display = "block";
+        }else{
+            tarea.style.display = "none";
+        }
+
+    });
+
+});
