@@ -22,8 +22,8 @@ form.addEventListener("submit", function(e){
         <div class="card__head">
             <span class="badge">${categoria}</span>
             <div class="actions">
-                <button class="icon" type="button">☆</button>
-                <button class="icon" type="button">✓</button>
+                <button class="icon" type="button" data-action="fav">☆</button>
+                <button class="icon" type="button" data-action="done">✓</button>
                 <button class="icon danger" type="button" data-action="del">🗑</button>
             </div>
         </div>
@@ -36,16 +36,28 @@ form.addEventListener("submit", function(e){
 });
 
 
-// eliminar tareas
+// acciones de botones eliminar, marcar completada y favorita
 lista.addEventListener("click", function(e){
 
     const boton = e.target.closest("button");
-
     if(!boton) return;
 
+    const tarea = boton.closest(".card");
+
+    // eliminar
     if(boton.dataset.action === "del"){
-        const tarea = boton.closest(".card");
         tarea.remove();
+    }
+
+    // marcar completada
+    if(boton.dataset.action === "done"){
+        tarea.classList.toggle("is-done");
+    }
+
+    // favorita
+    if(boton.dataset.action === "fav"){
+        tarea.dataset.fav = tarea.dataset.fav === "0" ? "1" : "0";
+        boton.textContent = tarea.dataset.fav === "1" ? "★" : "☆";
     }
 
 });
