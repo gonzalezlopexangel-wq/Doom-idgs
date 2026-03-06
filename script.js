@@ -61,3 +61,46 @@ lista.addEventListener("click", function(e){
     }
 
 });
+
+// filtros DE CATEGORÍAS
+// filtrar por categoría
+const filtros = document.querySelectorAll(".chip");
+
+filtros.forEach(function(boton){
+
+    boton.addEventListener("click", function(){
+
+        const filtro = boton.dataset.filter;
+        const tareas = document.querySelectorAll(".card");
+
+        // cambiar botón activo
+        filtros.forEach(b => b.classList.remove("is-active"));
+        boton.classList.add("is-active");
+
+        tareas.forEach(function(tarea){
+
+            if(filtro === "all"){
+                tarea.style.display = "block";
+            }
+
+            else if(filtro === "fav"){
+                if(tarea.dataset.fav === "1"){
+                    tarea.style.display = "block";
+                }else{
+                    tarea.style.display = "none";
+                }
+            }
+
+            else{
+                if(tarea.dataset.tag === filtro){
+                    tarea.style.display = "block";
+                }else{
+                    tarea.style.display = "none";
+                }
+            }
+
+        });
+
+    });
+
+});
