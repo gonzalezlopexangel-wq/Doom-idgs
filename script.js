@@ -1,4 +1,4 @@
-// crear nueva tarea 
+// crear nueva tarea
 const form = document.querySelector("#formTarea");
 const inputTitulo = document.querySelector("#inputTitulo");
 const selectTag = document.querySelector("#selectTag");
@@ -24,7 +24,7 @@ form.addEventListener("submit", function(e){
             <div class="actions">
                 <button class="icon" type="button">☆</button>
                 <button class="icon" type="button">✓</button>
-                <button class="icon danger" type="button">🗑</button>
+                <button class="icon danger" type="button" data-action="del">🗑</button>
             </div>
         </div>
         <p class="card__title">${titulo}</p>
@@ -33,4 +33,19 @@ form.addEventListener("submit", function(e){
     lista.appendChild(tarea);
 
     inputTitulo.value = "";
+});
+
+
+// eliminar tareas
+lista.addEventListener("click", function(e){
+
+    const boton = e.target.closest("button");
+
+    if(!boton) return;
+
+    if(boton.dataset.action === "del"){
+        const tarea = boton.closest(".card");
+        tarea.remove();
+    }
+
 });
