@@ -126,3 +126,30 @@ buscador.addEventListener("input", function(){
     });
 
 });
+
+// Limpier busquedad
+const btnLimpiar = document.querySelector("#btnLimpiarBuscar");
+
+btnLimpiar.addEventListener("click", function(){
+
+    // vaciar input
+    const buscador = document.querySelector("#inputBuscar");
+    buscador.value = "";
+
+    // mostrar todas las tarjetas según el filtro activo
+    const filtroActivo = document.querySelector(".chip.is-active").dataset.filter;
+    const tareas = document.querySelectorAll(".card");
+
+    tareas.forEach(function(tarea){
+
+        if(filtroActivo === "all"){
+            tarea.style.display = "block";
+        } else if(filtroActivo === "fav"){
+            tarea.style.display = tarea.dataset.fav === "1" ? "block" : "none";
+        } else {
+            tarea.style.display = tarea.dataset.tag === filtroActivo ? "block" : "none";
+        }
+
+    });
+
+});
